@@ -1,0 +1,26 @@
+2022-08-05 23:55:56.243761 | init_server
+
+2022-08-05 23:55:56.243761 | start test1
+
+2022-08-05 23:55:56.243761 | login waiting
+
+2022-08-05 23:56:06.751645 | user tester1 login
+
+2022-08-05 23:56:06.752642 | waiting cliants:1
+
+2022-08-05 23:56:06.752642 | login waiting
+
+2022-08-05 23:56:08.808142 | user tester1 login
+
+2022-08-05 23:56:08.809140 | waiting cliants:2
+
+2022-08-05 23:56:08.809140 | start match make
+
+2022-08-05 23:56:08.810138 | make 1 matchs
+
+2022-08-05 23:56:08.810138 | start game game-tester1-VS-tester1-1659711368809141
+
+2022-08-05 23:56:11.901868 | finish game game-tester1-VS-tester1-1659711368809141
+
+2022-08-05 23:56:11.907846 | finish test1
+
