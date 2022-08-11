@@ -150,7 +150,10 @@ class game:
             message = move + ',T' + str(t)
             self.player1.send_message(message)
             self.player2.send_message(message)
-            c_move = reversi.move_from_str(move)
+            if 'PASS' in move:
+                c_move = 64
+            else:
+                c_move = reversi.move_from_str(move)
             if c_move not in list(board.legal_moves):
                 self.player1.send_message('#ILLEGAL_MOVE')
                 self.player2.send_message('#ILLEGAL_MOVE')
@@ -160,8 +163,9 @@ class game:
                 result = ['lose', 'win']
                 break
             board.move(c_move)
+            moves_list.append(move)
             self.file_text += (move + k)
-            if board.is_game_over():
+            if board.is_game_over() or (len(moves_list) >= 2 and moves_list[-1] == moves_list[-2]):
                 winner = self.return_winner(board)
                 self.player1.send_message('#DOUBLE_PASS')
                 self.player2.send_message('#DOUBLE_PASS')
@@ -202,7 +206,10 @@ class game:
             message = move + ',T' + str(t)
             self.player2.send_message(message)
             self.player1.send_message(message)
-            c_move = reversi.move_from_str(move)
+            if 'PASS' in move:
+                c_move = 64
+            else:
+                c_move = reversi.move_from_str(move)
             if c_move not in list(board.legal_moves):
                 self.player2.send_message('#ILLEGAL_MOVE')
                 self.player1.send_message('#ILLEGAL_MOVE')
@@ -212,8 +219,9 @@ class game:
                 result = ['win', 'lose']
                 break
             board.move(c_move)
+            moves_list.append(move)
             self.file_text += (move + k)
-            if board.is_game_over():
+            if board.is_game_over() or (len(moves_list) >= 2 and moves_list[-1] == moves_list[-2]):
                 winner = self.return_winner(board)
                 self.player1.send_message('#DOUBLE_PASS')
                 self.player2.send_message('#DOUBLE_PASS')

@@ -72,7 +72,7 @@ class Player:
             if 'TORYO' in move:#投了
                 return '%TORYO', int(time.time() - start_time)
             if 'PASS' in move:#パス
-                return 'pass', int(time.time() - start_time)
+                return 'PASS', int(time.time() - start_time)
             if len(move) >= 2:#指し手
                 break
             if int(time.time() - start_time) >= (time_limit + 5):
