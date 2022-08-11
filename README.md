@@ -19,7 +19,20 @@ online_othello_protocol対応の簡易的なオセロサーバー
 ## 想定している使い方
 - なし
 
+# ファイル・ディレクトリの説明
+- main_v1.py: メイン部
+- play_game_v1.py: 1ゲームの管理
+- Player_class.py: 各プレーヤーの管理を容易にする
+- rate_v1.py: レートの計算など
+- logger_v1.py: ログを取る
+- output_v1.py: HTMLファイルへの出力
+- /Players/Players.json: 全プレーヤーの管理
+- /Players/Player/: 各プレーヤーのファイルを保存するディレクトリ
+- /games/: 棋譜を保存するディレクトリ
+- /log/main_log.txt: メインのログ
+- /test_player/test_Cliant.py: クライアント側のプログラムの基礎
+- /test_player/test_player1.py: ランダム行動をするクライアント
+
 # ちゃんと実装できてないところ・不具合
-- 手番を持った対局者が行動しないと永久に対局が終わらない
 - ログアウト関連の部分
 - その他多数
