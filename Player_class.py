@@ -63,7 +63,7 @@ class Player:
         message = self.connect.recv(self.buf_size).decode('utf-8')
         return message
 
-    def get_move(self):
+    def get_move(self, time_limit):
         #指し手を受け取る関数
         #また、消費時間を計測している
         start_time = time.time()
@@ -75,6 +75,8 @@ class Player:
                 return 'pass', int(time.time() - start_time)
             if len(move) >= 2:#指し手
                 break
+            if int(time.time() - start_time) >= (time_limit + 5):
+                return None, int(time.time() - start_time)
         #とりあえず動けば良い
         return move[1:3], int(time.time() - start_time)
 

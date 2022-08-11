@@ -124,7 +124,7 @@ class game:
         moves_list = []
         while True:
             #先手の行動
-            move, t = self.player1.get_move()
+            move, t = self.player1.get_move(player1_time + self.time_setting['inc'])
             #時間などの管理
             player1_time -= t
             player1_time += self.time_setting['inc']
@@ -180,7 +180,7 @@ class game:
                 self.file_text += ('%DOUBLE_PASS' + k)
                 break
             #後手番
-            move, t = self.player2.get_move()
+            move, t = self.player2.get_move(player2_time + self.time_setting['inc'])
             player2_time -= t
             player2_time += self.time_setting['inc']
             if player2_time <= 0:
