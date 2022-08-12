@@ -148,8 +148,8 @@ class game:
                 break
             #手番を変更
             message = move + ',T' + str(t)
-            self.player1.send_message(message)
-            self.player2.send_message(message)
+            self.player1.send_message('+' + message)
+            self.player2.send_message('+' + message)
             if 'PASS' in move:
                 c_move = 64
             else:
@@ -204,8 +204,8 @@ class game:
                 result = ['win', 'lose']
                 break
             message = move + ',T' + str(t)
-            self.player2.send_message(message)
-            self.player1.send_message(message)
+            self.player2.send_message('-' + message)
+            self.player1.send_message('-' + message)
             if 'PASS' in move:
                 c_move = 64
             else:
