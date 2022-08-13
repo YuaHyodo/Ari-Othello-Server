@@ -4,7 +4,7 @@ from security_v1 import Security
 from Player_class import Player
 from  threading import Thread
 from logger_v1 import logger
-import numpy as np
+import random
 import socket
 
 #各種設定
@@ -66,7 +66,7 @@ class Server_v1:
             print('cancel match make')
             return
         #ランダムにマッチング
-        np.random.shuffle(self.waiting_players)
+        random.shuffle(self.waiting_players)
         a = list(range(0, len(self.waiting_players), 2))
         for i in a:
             player1 = self.waiting_players[i]
