@@ -8,7 +8,7 @@ online_othello_protocol対応の簡易的なオセロサーバー
 
 # 注意
 - 実行にはsnail_reversi( https://github.com/YuaHyodo/snail_reversi )が必要です。
-- snail_reversiを自分のPCで動かす方法についてはsnail_reversiのリポジトリで確認してください。
+- snail_reversiをインストールする方法についてはsnail_reversiのリポジトリで確認してください。
 
 # すでにある機能・想定している使い方
 ## すでにある機能
