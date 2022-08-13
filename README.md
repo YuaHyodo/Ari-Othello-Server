@@ -6,6 +6,10 @@ online_othello_protocol対応の簡易的なオセロサーバー
 - online_othello_protocolについてはここを参照のこと: https://github.com/YuaHyodo/online_othello_protocol
 - ファイル・クラス・関数・変数名、出力されるメッセージ、実装方法、設計思想などに関する意見は受け付けておりません。 (不満があるなら自分で作ってください)
 
+# 注意
+- 実行にはsnail_reversi( https://github.com/YuaHyodo/snail_reversi )が必要です。
+- snail_reversiを自分のPCで動かす方法についてはsnail_reversiのリポジトリで確認してください。
+
 # すでにある機能・想定している使い方
 ## すでにある機能
 - online_othello_protocolを使ったオセロの対局を行う機能
