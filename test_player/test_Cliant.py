@@ -100,7 +100,7 @@ class Cliant:
                 m = 'pass'
                 break
             if ',T' in m:
-                m = m[0:2]
+                m = m[1:3]
                 break
         return m
 
