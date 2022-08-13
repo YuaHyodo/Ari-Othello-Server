@@ -2,7 +2,7 @@
 メッセージをlistに格納して、それを順番に送るようにすると
 まだマシになりそうなので、あとでやる。
 """
-import creversi as reversi
+from snail_reversi.Board import Board
 import time
 
 from rate_v1 import update_rate
@@ -115,7 +115,7 @@ class game:
     def main_loop(self):
         #メインループ(不完全)
         #合法手チェック用
-        board = reversi.Board()
+        board = Board()
         #残りの持ち時間
         player1_time = self.time_setting['total']
         player2_time = self.time_setting['total']
@@ -151,10 +151,10 @@ class game:
             self.player1.send_message('+' + message)
             self.player2.send_message('+' + message)
             if 'PASS' in move:
-                c_move = 64
+                usix_move = 'pass'
             else:
-                c_move = reversi.move_from_str(move)
-            if c_move not in list(board.legal_moves):
+                usix_move = move
+            if usix_move not in board.gen_legal_moves():
                 self.player1.send_message('#ILLEGAL_MOVE')
                 self.player2.send_message('#ILLEGAL_MOVE')
                 self.player1.send_message('#LOSE')
@@ -162,10 +162,10 @@ class game:
                 self.file_text += ('%ILLEGAL_MOVE' + k)
                 result = ['lose', 'win']
                 break
-            board.move(c_move)
+            board.move_from_usix(usix_move)
             moves_list.append(move)
             self.file_text += (move + k)
-            if board.is_game_over() or (len(moves_list) >= 2 and moves_list[-1] == moves_list[-2]):
+            if board.is_gameover() or (len(moves_list) >= 2 and moves_list[-1] == moves_list[-2]):
                 winner = self.return_winner(board)
                 self.player1.send_message('#DOUBLE_PASS')
                 self.player2.send_message('#DOUBLE_PASS')
@@ -183,6 +183,7 @@ class game:
                     result = ['lose', 'win']
                 self.file_text += ('%DOUBLE_PASS' + k)
                 break
+            
             #後手番
             move, t = self.player2.get_move(player2_time + self.time_setting['inc'])
             player2_time -= t
@@ -207,10 +208,10 @@ class game:
             self.player2.send_message('-' + message)
             self.player1.send_message('-' + message)
             if 'PASS' in move:
-                c_move = 64
+                usix_move = 'pass'
             else:
-                c_move = reversi.move_from_str(move)
-            if c_move not in list(board.legal_moves):
+                usix_move = move
+            if usix_move not in board.gen_legal_moves():
                 self.player2.send_message('#ILLEGAL_MOVE')
                 self.player1.send_message('#ILLEGAL_MOVE')
                 self.player2.send_message('#LOSE')
@@ -218,10 +219,10 @@ class game:
                 self.file_text += ('%ILLEGAL_MOVE' + k)
                 result = ['win', 'lose']
                 break
-            board.move(c_move)
+            board.move_from_usix(usix_move)
             moves_list.append(move)
             self.file_text += (move + k)
-            if board.is_game_over() or (len(moves_list) >= 2 and moves_list[-1] == moves_list[-2]):
+            if board.is_gameover() or (len(moves_list) >= 2 and moves_list[-1] == moves_list[-2]):
                 winner = self.return_winner(board)
                 self.player1.send_message('#DOUBLE_PASS')
                 self.player2.send_message('#DOUBLE_PASS')
