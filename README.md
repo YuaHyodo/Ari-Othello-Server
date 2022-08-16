@@ -41,3 +41,7 @@ online_othello_protocol対応の簡易的なオセロサーバー
 # ちゃんと実装できてないところ・不具合
 - ログアウト関連の部分
 - その他多数
+
+# ライセンス
+- Ari-Othello-ServerはMITライセンスです。
+- 詳細はLICENSEファイルをご確認ください。
