@@ -93,8 +93,8 @@ class Player:
         start_time = time.time()
         while True:
             move = self.recv_message()
-            if 'TORYO' in move:#投了
-                return '%TORYO', int(time.time() - start_time)
+            if 'RESIGN' in move:#投了
+                return 'RESIGN', int(time.time() - start_time)
             if 'PASS' in move:#パス
                 return 'PASS', int(time.time() - start_time)
             if len(move) >= 2:#指し手
