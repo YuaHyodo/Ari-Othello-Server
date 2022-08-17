@@ -42,22 +42,28 @@ class Server_v1:
         self.security = Security()
         self.log.clear_log()
         self.waiting_players = []
-        self.playing_players = []
         self.games = []
         self.log.write('init_server')
+        self.lock_waiting_players = False
 
-    def login_client(self):
-        #ログイン待機
-        self.log.write('login waiting')
+    def connect_and_login_client(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind((HOST, PORT))
         s.listen(1)
         while True:
             try:
-                client, addr = s.accept()
+                client = s.accept()
                 break
             except:
                 pass
+        login_thread = Thread(target=self.login_client, args=(client,))
+        login_thread.start()
+        return client
+
+    def login_client(self, client):
+        #ログイン待機
+        client = client[0]
+        self.log.write('login waiting')
         while True:
             m = client.recv(buf_size).decode('utf-8')
             if 'LOGIN' in m:
@@ -70,8 +76,11 @@ class Server_v1:
             self.log.write('user ' + username + ' login')
             client.send(str('LOGIN:' + username + ' OK' + k).encode('utf-8'))
             #待機プレーヤのlistに追加
-            player = Player(client, username, password)
-            self.waiting_players.append(player)
+            while True:
+                if not self.lock_waiting_players:
+                    player = Player(client, username, password)
+                    self.waiting_players.append(player)
+                    break
         else:
             self.log.write('login failed username: ' + username)
             client.send(('LOGIN:incorrect' + k).encode('utf-8'))
@@ -87,6 +96,7 @@ class Server_v1:
                 #プレーヤー数が不十分
                 self.log.write('cancel match make')
                 return
+            self.lock_waiting_players = True
             #ランダムにマッチング
             random.shuffle(self.waiting_players)
             a = list(range(0, len(self.waiting_players), 2))
@@ -98,6 +108,7 @@ class Server_v1:
                 self.games.append(game(player1, player2)) 
             #待機listから外す
             del self.waiting_players[0:a[-1] + 2]
+            self.lock_waiting_players = False
             self.log.write('make ' + str(len(self.games)) + ' matchs')
             #対局を開始する
             threads_list = []
@@ -120,7 +131,7 @@ class Server_v1:
 
     def login_client_loop(self):
         while True:
-            self.login_client()
+            self.connect_and_login_client()
             self.log.write('waiting clients:' + str(len(self.waiting_players)))
         return
 
@@ -138,8 +149,9 @@ class Server_v1:
         #テスト
         self.log.write('start test1')
         while len(self.waiting_players) < 2:
-            self.login_client()
+            self.connect_and_login_client()
             self.log.write('waiting clients:' + str(len(self.waiting_players)))
+        time.sleep(10)
         self.match_make()
         self.log.write('finish test1')
         return
