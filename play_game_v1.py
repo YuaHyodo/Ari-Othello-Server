@@ -162,7 +162,7 @@ class game:
                 result = ['lose', 'win']
                 break
             #投了したか？
-            if move == '%TORYO':
+            if move == 'RESIGN':
                 self.player1.send_message('#RESIGN')
                 self.player2.send_message('#RESIGN')
                 self.player1.send_message('#LOSE')
@@ -184,6 +184,8 @@ class game:
                 self.player1.send_message('#LOSE')
                 self.player2.send_message('#WIN')
                 self.file_text += ('%ILLEGAL_MOVE' + k)
+                self.file_text += ("'illegal_move: " + usix_move + k)
+                self.file_text += ("'legal_moves: " + str(board.gen_legal_moves()) + k)
                 result = ['lose', 'win']
                 break
             board.move_from_usix(usix_move)
@@ -220,7 +222,7 @@ class game:
                 self.file_text += ('%TIME_UP' + k)
                 result = ['win', 'lose']
                 break
-            if move == '%TORYO':
+            if move == 'RESIGN':
                 self.player2.send_message('#RESIGN')
                 self.player1.send_message('#RESIGN')
                 self.player2.send_message('#LOSE')
@@ -241,6 +243,8 @@ class game:
                 self.player2.send_message('#LOSE')
                 self.player1.send_message('#WIN')
                 self.file_text += ('%ILLEGAL_MOVE' + k)
+                self.file_text += ("'illegal_move: " + usix_move + k)
+                self.file_text += ("'legal_moves: " + str(board.gen_legal_moves()) + k)
                 result = ['win', 'lose']
                 break
             board.move_from_usix(usix_move)
