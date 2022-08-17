@@ -22,12 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from test_Cliant import Cliant
+from test_Client import Client
 from snail_reversi.Board import Board
 import random
 import time
 
-class tester1(Cliant):
+class tester1(Client):
     def __init__(self):
         super().__init__()
         self.player_info = ['tester1', '1234']

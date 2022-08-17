@@ -28,7 +28,7 @@ import time
 
 k = '\n'
 
-class Cliant:
+class Client:
     def __init__(self):
         self.host = '127.0.0.1'
         self.port = 4081
