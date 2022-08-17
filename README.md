@@ -35,7 +35,7 @@ online_othello_protocol対応の簡易的なオセロサーバー
 - /Players/Player/: 各プレーヤーのファイルを保存するディレクトリ
 - /games/: 棋譜を保存するディレクトリ
 - /log/main_log.txt: メインのログ
-- /test_player/test_Cliant.py: クライアント側のプログラムの基礎
+- /test_player/test_Client.py: クライアント側のプログラムの基礎
 - /test_player/test_player1.py: ランダム行動をするクライアント
 
 # ちゃんと実装できてないところ・不具合
