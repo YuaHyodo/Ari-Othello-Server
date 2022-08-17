@@ -24,6 +24,10 @@ SOFTWARE.
 
 import json
 
+username_available_characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_']
+
 class Security:
     """
     セキュリティ関連の機能を追加する部分になる予定だが、
@@ -46,6 +50,10 @@ class Security:
         """
         ログインしても良いならTrue, ダメならFalse
         """
+        if False in [(i in username_available_characters) for i in ''.join(username.splitlines())] or len(username) > 10:
+            return False
+        if False in [(i in username_available_characters) for i in ''.join(password.splitlines())] or len(password) > 10:
+            return False
         username = ''.join(username.split(' '))
         password = ''.join(password.split(' '))
         if username not in self.white_list.keys():
