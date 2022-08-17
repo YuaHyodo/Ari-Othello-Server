@@ -102,6 +102,7 @@ class Player:
             if int(time.time() - start_time) >= (time_limit + 5):
                 return None, int(time.time() - start_time)
         #とりあえず動けば良い
+        move = move.split()
         return move[1:3], int(time.time() - start_time)
 
     
