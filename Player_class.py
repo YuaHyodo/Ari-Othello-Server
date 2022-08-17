@@ -92,7 +92,7 @@ class Player:
         #また、消費時間を計測している
         start_time = time.time()
         while True:
-            move = self.recv_message()
+            move = ''.join(self.recv_message().splitlines())
             if 'RESIGN' in move:#投了
                 return 'RESIGN', int(time.time() - start_time)
             if 'PASS' in move:#パス

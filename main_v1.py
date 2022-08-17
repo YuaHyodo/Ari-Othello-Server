@@ -59,7 +59,7 @@ class Server_v1:
             except:
                 pass
         while True:
-            m = str(client.recv(buf_size))
+            m = client.recv(buf_size).decode('utf-8')
             if 'LOGIN' in m:
                 break
         #usernameを抽出
