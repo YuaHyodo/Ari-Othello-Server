@@ -22,7 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from test_Client import Client
+from test_Client_ssl import Client
+#from test_Client import Client
 from snail_reversi.Board import Board
 import random
 import time
