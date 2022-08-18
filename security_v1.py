@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+import hashlib
 import json
 
 username_available_characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
@@ -46,6 +47,11 @@ class Security:
             self.white_list = json.load(f)
         return
 
+    def return_digest(self, word):
+        self.hash_algorithm = hashlib.md5()
+        self.hash_algorithm.update(word.encode('utf-8'))
+        return self.hash_algorithm.hexdigest()
+
     def login_check(self, username, password):
         """
         ログインしても良いならTrue, ダメならFalse
@@ -59,7 +65,7 @@ class Security:
         if username not in self.white_list.keys():
             #リストに名前なし
             return False
-        if password != self.white_list[username]:
+        if self.return_digest(password) != self.white_list[username]:
             #パスワードが違う
             return False
         return True
@@ -68,7 +74,7 @@ class Security:
         """
         ユーザーを追加する
         """
-        self.white_list[username] = password
+        self.white_list[username] = self.return_digest(password)
         with open(self.white_list_file, 'w') as f:
             json.dump(self.white_list, f)
         return

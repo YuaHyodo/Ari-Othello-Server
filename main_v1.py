@@ -33,6 +33,7 @@ from setting import*
 import random
 import socket
 import time
+import ssl
 
 class Server_v1:
     def __init__(self):
@@ -50,9 +51,12 @@ class Server_v1:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind((HOST, PORT))
         s.listen(1)
+        context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+        context.load_cert_chain(certfile=cerfile, keyfile=keyfile)
+        s2 = context.wrap_socket(s, server_side=True)
         while True:
             try:
-                client = s.accept()
+                client = s2.accept()
                 break
             except:
                 pass
@@ -151,7 +155,6 @@ class Server_v1:
         while len(self.waiting_players) < 2:
             self.connect_and_login_client()
             self.log.write('waiting clients:' + str(len(self.waiting_players)))
-        time.sleep(10)
         self.match_make()
         self.log.write('finish test1')
         return
