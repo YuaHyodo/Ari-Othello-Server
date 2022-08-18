@@ -28,3 +28,5 @@ PORT = 4081
 buf_size = 1024
 k = '\n'
 login_wait_time = 10
+cerfile = ''
+keyfile = ''
