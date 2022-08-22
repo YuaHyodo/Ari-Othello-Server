@@ -48,8 +48,9 @@ class HTML_update:
                         <meta charset="UTF-8">
                         <title lang="ja">Ari Othello Server</title>
                         </head>
-                        <body>
+                        <body bgcolor="skyblue">
                         <article>
+                        <p><a href="">top</a></p>
                         <table summary="プレーヤの一覧" border="1" bgcolor="yellow" align="center" width="500px">
                         <caption>Players</caption>
                         <thead>

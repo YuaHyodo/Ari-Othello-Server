@@ -22,12 +22,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-#各種設定
-HOST = '127.0.0.1'
-PORT = 4081
-buf_size = 1024
-k = '\n'
-login_wait_time = 10
-
-cerfile = r'C:\Windows\System32/Ari_Othello_Server_SLL_test1_cr.crt'
-keyfile = r'C:\Windows\System32/Ari_Othello_Server_SLL_test1_k.key'
+def load_game(path):
+    output = {'gamename': '', 'player': {}, 'moves': [], 'result': None}
+    with open(path, 'r') as f:
+        game = f.read()
+    game = game.splitlines()
+    read_moves = False
+    for i in game:
+        if 'Game_ID' in i:
+            output['gamename'] = i.split(':')[1]
+        if 'Name+' in i:
+            output['player']['black'] = i.split(':')[1]
+        if 'Name-' in i:
+            output['player']['white'] = i.split(':')[1]
+        if '%'  in i:
+            output['result'] = [game[-2][1:], game[-1][1:], game[-3]]
+            break
+        if read_moves:
+            if i == 'PASS':
+                i = 'pass'
+            output['moves'].append(i)
+        if 'END Game_Summary' in i:
+            read_moves = True
+    return output

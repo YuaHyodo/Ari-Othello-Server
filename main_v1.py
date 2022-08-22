@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+import game_HTML_v1 as game_HTML
 from output_v1 import HTML_update
 from play_game_v1 import game
 from security_v1 import Security
@@ -119,6 +120,7 @@ class Server_v1:
             for g in self.games:
                 thread = Thread(target=g.start)
                 threads_list.append(thread)
+            game_HTML.update_recent_games_list(self.games)
             for t in range(len(threads_list)):
                 threads_list[t].start()
                 self.log.write('start game ' + self.games[t].ID)
@@ -139,9 +141,17 @@ class Server_v1:
             self.log.write('waiting clients:' + str(len(self.waiting_players)))
         return
 
+    def html_update_loop(self):
+        while True:
+            game_HTML.main()
+            time.sleep(10)
+        return
+
     def main(self):
         login_client_thread = Thread(target=self.login_client_loop)
         login_client_thread.start()
+        html_thread = Thread(target=self.html_update_loop)
+        html_thread.start()
         while True:#無限に稼働
             if datetime.now().minute % 5 == 0:
                 match_thread = Thread(target=self.match_make)

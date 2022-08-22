@@ -86,41 +86,22 @@ class game:
         return
 
     def send_gamesummary(self, player_color='+'):
-        summary = 'BEGIN Game_Summary'
-        summary += k
-        summary += 'Protocol_Version: 0.0.1'
-        summary += k
-        summary += ('Game_ID:' + self.ID)
-        summary += k
-        summary += ('Name+:' + self.player1.name)
-        summary += k
-        summary += ('Name-:' + self.player2.name)
-        summary += k
-        summary += ('Your_Turn:' + player_color)
-        summary += k
-        summary += 'To_Move:+'
-        summary += k
-        summary += 'BEGIN Time'
-        summary += k
-        summary += ('Total_Time:' + str(self.time_setting['total']))
-        summary += k
-        summary += ('Increment:' + str(self.time_setting['inc']))
-        summary += k
-        summary += 'END Time'
-        summary += k
-        summary += 'BEGIN Position'
-        summary += k
-        summary += 'position startpos'
-        summary += k
-        summary += 'END Position'
-        summary += k
-        summary += 'END Game_Summary'
-        summary += k
+        messages = ['BEGIN Game_Summary', 'Protocol_Version: 0.0.1',
+                            ('Game_ID:' + self.ID), ('Name+:' + self.player1.name),
+                            ('Name-:' + self.player2.name), ('Your_Turn:' + player_color),
+                            'To_Move:+', 'BEGIN Time', ('Total_Time:' + str(self.time_setting['total'])),
+                            ('Increment:' + str(self.time_setting['inc'])), 'END Time',
+                            'BEGIN Position', 'position startpos', 'END Position', 'END Game_Summary']
+        summary = ''
+        for i in messages:
+            summary += (i + k)
         if player_color == '+':
             self.player1.send_message(summary)
+            for i in messages:
+                if 'Your' not in i:
+                    self.file_text += (i + k)
         else:
             self.player2.send_message(summary)
-        self.file_text += summary
         return
 
     def return_winner(self, board):
@@ -209,6 +190,7 @@ class game:
                     result = ['lose', 'win']
                 self.file_text += ('%DOUBLE_PASS' + k)
                 break
+            self.write()
             
             #後手番
             move, t = self.player2.get_move(player2_time + self.time_setting['inc'])
@@ -268,6 +250,9 @@ class game:
                     result = ['lose', 'win']
                 self.file_text += ('%DOUBLE_PASS' + k)
                 break
+            self.write()
+        self.file_text += ("'Black " + result[0] + k)
+        self.file_text += ("'White " + result[1] + k)
         #棋譜を保存
         self.write()
         #リザルトを反映

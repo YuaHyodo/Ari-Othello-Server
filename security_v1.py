@@ -56,9 +56,9 @@ class Security:
         """
         ログインしても良いならTrue, ダメならFalse
         """
-        if False in [(i in username_available_characters) for i in ''.join(username.splitlines())] or len(username) > 10:
+        if False in [(i in username_available_characters) for i in ''.join(username.splitlines())] or len(username) > 30:
             return False
-        if False in [(i in username_available_characters) for i in ''.join(password.splitlines())] or len(password) > 10:
+        if False in [(i in username_available_characters) for i in ''.join(password.splitlines())] or len(password) > 30:
             return False
         username = ''.join(username.split(' '))
         password = ''.join(password.split(' '))
