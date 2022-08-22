@@ -1,0 +1,17 @@
+#container{display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: 100px 1fr 1fr 1fr;}
+
+#back_to_top{color:green; grid-column: 1/2; grid-row:1/2;}
+
+#Players_table_div{grid-column: 2/3; grid-row: 1/2; align="center"; height: 100px; width: 1fr;}
+#Players_table{height: 50px; width: 1fr;}
+#Black{width: 150px;}
+#White{width: 150px;}
+
+#moves_table_div{grid-column: 2/3; grid-row: 4/5;}
+
+#HTML_Board_div{grid-column: 2/3; grid-row: 2/4;}
+#HTML_Board_table{width: 300px;}
+#Stones_num_table{width: 300px;}
+#prev_and_next_button{width: 300px;}
