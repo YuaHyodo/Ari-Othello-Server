@@ -29,5 +29,5 @@ buf_size = 1024
 k = '\n'
 login_wait_time = 10
 
-cerfile = r'C:\Windows\System32/Ari_Othello_Server_SLL_test1_cr.crt'
-keyfile = r'C:\Windows\System32/Ari_Othello_Server_SLL_test1_k.key'
+cerfile = ''
+keyfile = ''
