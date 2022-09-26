@@ -19,6 +19,12 @@ online_othello_protocol対応の簡易的なオセロサーバー
 - 簡易的なレートをつける機能
 - プレーヤーの情報を自動で読み取ってHTMLファイルに書き出す機能(以下、サンプル)
 ![スクリーンショット 2022-08-03 230135](https://user-images.githubusercontent.com/66828980/183107034-3a6c1943-f14c-4f9a-96cd-cc16783ee35a.png)
+- JavaScriptを使って棋譜をブラウザで良い感じに見せる機能(以下、サンプル)
+![スクリーンショット 2022-09-26 235710](https://user-images.githubusercontent.com/66828980/192311057-9d3a43f1-da8c-48ec-9999-e2ae1425d0f4.jpg)
+![スクリーンショット 2022-09-26 235749](https://user-images.githubusercontent.com/66828980/192311093-3594287d-3b63-4ee0-b94c-0f7c6859bf4a.jpg)
+![スクリーンショット 2022-09-26 235844](https://user-images.githubusercontent.com/66828980/192311137-2d5a25a6-0970-4ca4-a1ff-efaf46bdb35d.jpg)
+
+
 
 ## 想定している使い方
 - なし
