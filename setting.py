@@ -29,5 +29,7 @@ buf_size = 1024
 k = '\n'
 login_wait_time = 10
 
+no_ssl = False
+
 cerfile = ''
 keyfile = ''
