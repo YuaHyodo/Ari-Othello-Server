@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import game_HTML_v1 as game_HTML
+import game_HTML_v2 as game_HTML
 from output_v1 import HTML_update
 from play_game_v1 import game
 from security_v1 import Security
@@ -52,9 +52,12 @@ class Server_v1:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind((HOST, PORT))
         s.listen(1)
-        context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-        context.load_cert_chain(certfile=cerfile, keyfile=keyfile)
-        s2 = context.wrap_socket(s, server_side=True)
+        if no_ssl:
+            s2 = s
+        else:
+            context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+            context.load_cert_chain(certfile=cerfile, keyfile=keyfile)
+            s2 = context.wrap_socket(s, server_side=True)
         while True:
             try:
                 client = s2.accept()
